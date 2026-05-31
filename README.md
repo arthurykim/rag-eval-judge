@@ -7,7 +7,7 @@ generation)** system, scores its answers with a **local LLM-as-judge**, and runs
 No API keys required — everything runs locally:
 - **Data:** Wikipedia public API (`wikipedia` package)
 - **Embeddings:** `sentence-transformers` (local)
-- **Generation + Judge:** [Ollama](https://ollama.com) running `llama3` (local)
+- **Generation + Judge:** [Ollama](https://ollama.com) running `llama3.2:3b` (local)
 
 ## Pipeline
 
@@ -26,6 +26,23 @@ Wikipedia API ──▶ chunk + embed ──▶ retrieve top-k ──▶ LLM ans
 
 We run every question at several `top_k` settings to create variance, log
 features + judge scores to a CSV, then fit an OLS regression and plot it.
+
+## Results
+
+Across 60 runs (15 questions × `top_k` ∈ {1, 2, 4, 8}), scored by a local
+`llama3.2:3b` judge:
+
+![Regression analysis](assets/analysis.png)
+
+**Finding:** the *peak* retrieval similarity (`max_similarity`) is a
+statistically significant predictor of judge **faithfulness**
+(coefficient ≈ +14.7, p ≈ 0.007), while raw context size and `top_k` are not —
+and the two are collinear (more `top_k` simply means more context). In other
+words, *how relevant your single best retrieved chunk is* matters more for
+answer faithfulness than *how much* context you stuff into the prompt.
+
+> Numbers will vary by run since local LLM generation is non-deterministic;
+> re-run `run_experiment.py` to reproduce.
 
 ## Setup
 
