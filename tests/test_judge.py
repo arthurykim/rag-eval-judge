@@ -2,9 +2,9 @@
 test our parsing/robustness logic without invoking a model."""
 from unittest.mock import patch
 
-import judge
-from judge import _parse_scores, judge as run_judge
-from rag import RagResult
+import rag_eval.judge as judge
+from rag_eval.judge import _parse_scores, judge as run_judge
+from rag_eval.rag import RagResult
 
 
 # ---------- _parse_scores ----------

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import wikipedia
 
-CACHE_DIR = Path(__file__).parent / "cache"
+CACHE_DIR = Path(__file__).resolve().parent.parent / "cache"  # project-root /cache
 CACHE_DIR.mkdir(exist_ok=True)
 
 # Topics that form our knowledge base. Keep curated + factual so the judge

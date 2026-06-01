@@ -6,9 +6,9 @@ does retrieving more context change answer quality?
 """
 import pandas as pd
 
-from judge import judge
-from questions import QUESTIONS
-from rag import RagSystem
+from rag_eval.judge import judge
+from rag_eval.questions import QUESTIONS
+from rag_eval.rag import RagSystem
 
 TOP_K_SETTINGS = [1, 2, 4, 8]
 OUTPUT_CSV = "outputs/results.csv"

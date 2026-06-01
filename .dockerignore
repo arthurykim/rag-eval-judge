@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*/__pycache__/
+*.pyc
+cache/
+outputs/
+assets/
+.git/
+.gitignore
+.hf-cache/

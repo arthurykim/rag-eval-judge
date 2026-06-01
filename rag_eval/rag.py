@@ -10,7 +10,7 @@ import numpy as np
 import ollama
 from sentence_transformers import SentenceTransformer
 
-from corpus import fetch_articles
+from rag_eval.corpus import fetch_articles
 
 EMBED_MODEL = "all-MiniLM-L6-v2"   # small, fast, local
 GEN_MODEL = "llama3.2:3b"          # pulled via: ollama pull llama3.2:3b (memory-friendly on Apple Silicon)

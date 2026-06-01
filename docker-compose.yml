@@ -1,0 +1,33 @@
+# Two-service stack:
+#   ollama — runs the local LLM (generation + judge)
+#   api    — the FastAPI service that calls Ollama
+#
+# Usage:
+#   docker compose up -d
+#   docker compose exec ollama ollama pull llama3.2:3b   # one-time model pull
+#   curl localhost:8000/health
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    depends_on:
+      ollama:
+        condition: service_healthy
+
+volumes:
+  ollama_models:

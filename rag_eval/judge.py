@@ -8,7 +8,7 @@ import re
 
 import ollama
 
-from rag import RagResult
+from rag_eval.rag import RagResult
 
 JUDGE_MODEL = "llama3.2:3b"   # could be a different/stronger model than GEN_MODEL
 

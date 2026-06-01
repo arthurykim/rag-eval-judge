@@ -3,7 +3,7 @@ or uses pure-logic functions, so tests run fast and offline."""
 import numpy as np
 import pytest
 
-from rag import chunk_text, RagResult, RagSystem, CHUNK_CHARS, CHUNK_OVERLAP
+from rag_eval.rag import chunk_text, RagResult, RagSystem, CHUNK_CHARS, CHUNK_OVERLAP
 
 
 # ---------- chunk_text ----------
